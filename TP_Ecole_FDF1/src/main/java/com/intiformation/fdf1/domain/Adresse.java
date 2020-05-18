@@ -1,5 +1,7 @@
 package com.intiformation.fdf1.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -14,7 +17,7 @@ import javax.persistence.Table;
  * 
  * Liaisons : 
  * 
- * Adresse (porteur FK) 1---------1 Personne
+ * Adresse 1---------1 Personne (porteur FK)
  * 
  * 
  * @author IN-DF-028
@@ -22,10 +25,13 @@ import javax.persistence.Table;
  */
 @Entity(name="adresse")
 @Table(name="adresses")
-public class Adresse {
+public class Adresse implements Serializable{
 
-	/*_________________ props ________________*/
+	@Transient
+	private static final long serialVersionUID = 1L;
 	
+	/*_________________ props ________________*/
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) // auto-increment
 	@Column(name="id_adresse")
@@ -108,5 +114,10 @@ public class Adresse {
 		this.personne = personne;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 	
 }
