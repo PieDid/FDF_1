@@ -15,6 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Classe Entité Personne
@@ -35,6 +36,12 @@ public class Personne implements Serializable{
 
 	/*_________________ props ________________*/
 	
+	/**
+	 * Pour enlever le warning
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_personne")
@@ -220,5 +227,13 @@ public class Personne implements Serializable{
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 } // end class
