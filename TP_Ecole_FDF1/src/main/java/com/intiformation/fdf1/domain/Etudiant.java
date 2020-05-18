@@ -5,8 +5,20 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 
+/**
+ * Classe Entité Etudiant
+ * 
+ * Liaisons : 
+ * 
+ * Etudiant *---------* Cours 
+ * 
+ * 
+ * @author IN-DF-028
+ *
+ */
 @Entity(name="etudiant")
 @DiscriminatorValue("Etudiant")
 public class Etudiant extends Personne implements Serializable{
@@ -16,6 +28,12 @@ public class Etudiant extends Personne implements Serializable{
 	/*_________________ props ________________*/
 	@Column(name="promotion")
 	int promotion;
+	
+	
+	
+	/*_____________ associations _____________*/
+	//Etudiant - Cours
+	
 
 	
 	

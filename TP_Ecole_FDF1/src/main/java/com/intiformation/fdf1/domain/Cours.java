@@ -11,6 +11,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+/**
+ * Classe Entité Cours
+ * 
+ * Liaisons : 
+ * 
+ * Cours *---------* Etudiant 
+ * Cours *---------1 Enseignant 
+ * 
+ * 
+ * @author IN-DF-028
+ *
+ */
 @Entity(name="cours")
 @Table(name="cours")
 public class Cours implements Serializable{
@@ -30,15 +43,14 @@ public class Cours implements Serializable{
 	
 	/*_____________ associations _____________*/
 	//Cours - Etudiant
-	@ManyToOne
-	@JoinColumn(name="etudiant_id", referencedColumnName="id_etudiant")
-	private Etudiant etudiant;
+	
 	
 	
 	//Cours - Enseignant
-	@ManyToOne
-	@JoinColumn(name="enseignant_id", referencedColumnName="id_enseignant")
-	private Enseignant enseignant;
+//	@ManyToOne
+//	@JoinColumn(name="enseignant_id", referencedColumnName="id_enseignant")
+//	private Enseignant enseignant;
+	
 	
 	
 	
