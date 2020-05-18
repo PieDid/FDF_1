@@ -46,11 +46,11 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 	@Autowired
 	private CoursRepository coursRepository;
 	
-	@Autowired
-	private PersonneRepository<Personne> personneRepository;
+	//@Autowired
+	//private PersonneRepository<Personne> personneRepository;
 	
 	public static void main(String[] args) {
-		ApplicationContext app = SpringApplication.run(TpEcoleFdf1Application.class, args);
+		ApplicationContext conteneurIoCSpring = SpringApplication.run(TpEcoleFdf1Application.class, args);
 		System.out.println("... Lancement de l'application ...");	
 	} // end main
 
@@ -71,12 +71,12 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		
 		/*__________ Creation des adresses ___________*/
 		
-		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE",null);
-		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06800", "CAGNES-SUR-MER",null);
-		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE",null);
-		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT",null);
-		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS",null);
-		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS",null);
+		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
+		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06800", "CAGNES-SUR-MER");
+		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE");
+		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
+		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
+		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
 		
 		/*__________ Ajout ___________*/
 		

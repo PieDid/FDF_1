@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.intiformation.fdf1.domain.Personne;
 
 @RepositoryRestResource
-public interface PersonneRepository<Personne> extends JpaRepository<Personne, Integer>{
+public interface PersonneRepository extends JpaRepository<Personne, Integer>{
 
 	/* Méthodes de bases de Jparepository */
 	

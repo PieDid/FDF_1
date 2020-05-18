@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 
 /**
  * Classe Entité Personne
@@ -66,9 +68,9 @@ public class Personne implements Serializable{
 	 * Liaison  1<-->1 avec adresse
 	 */
 	@OneToOne(fetch= FetchType.EAGER, cascade= CascadeType.ALL)
-	@JoinColumn(name = "adresse_id", referencedColumnName="id_adresse")
+	@JoinColumn(name = "adresse_id", referencedColumnName="id_adresse", foreignKey = @ForeignKey(name = "FK_personne_adresse"))
 	private Adresse adresse;
-
+	
 
 	/*_________________ ctors ________________*/
 	
