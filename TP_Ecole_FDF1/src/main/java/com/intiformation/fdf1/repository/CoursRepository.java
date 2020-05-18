@@ -6,17 +6,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.intiformation.fdf1.domain.Etudiant;
+import com.intiformation.fdf1.domain.Cours;
 
 @RepositoryRestResource
-public interface EtudiantRepository extends PersonneRepository<Etudiant>, JpaRepository<Etudiant, Integer>{
+public interface CoursRepository extends JpaRepository<Cours, Integer>{
 
 	/* Méthodes de bases de Jparepository */
 	
 	
 	/* Méthodes de requêtes */
-	@Query("SELECT e FROM Etudiant e WHERE e.promotion = ?1")
-	public List<Etudiant> findByPromotion(int promotion);
+	@Query("SELECT c FROM Cours c WHERE c.idCours = ?1")
+	public Cours findById(int idCours);
+	
+	@Query("SELECT c FROM Cours c WHERE c.libelle = ?1")
+	public List<Cours> findByLibelle(String libelle);
 	
 	
 }
