@@ -123,7 +123,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		// 3. config de la session factory
 		
 		// 3.1. packages contenant les classes entités
-		sessionFactoryBean.setPackagesToScan(new String[] {"com.intiformation.gestionimmo.domain"});
+		sessionFactoryBean.setPackagesToScan(new String[] {"com.intiformation.fdf1.domain"});
 		
 		// 3.2. injection de la datasource
 		sessionFactoryBean.setDataSource(pDataSource);

@@ -43,12 +43,12 @@ public class Etudiant extends Personne implements Serializable{
 		super();
 	}
 	
-	public Etudiant(int promotion, String nom, String prenom, double telephone, String email, String motDePasse, Adresse adresse) {
+	public Etudiant(int promotion, String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse) {
 		super(nom, prenom, telephone, email, motDePasse, adresse);
 		this.promotion = promotion;
 	}
 	
-	public Etudiant(int promotion, int idPersonne, String nom, String prenom, double telephone, String email, String motDePasse, Adresse adresse) {
+	public Etudiant(int promotion, int idPersonne, String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse) {
 		super(idPersonne, nom, prenom, telephone, email, motDePasse, adresse);
 		this.promotion = promotion;
 	}

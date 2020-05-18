@@ -25,7 +25,7 @@ public interface PersonneRepository<Personne> extends JpaRepository<Personne, In
 	public List<Personne> findByPrenom(String prenom);
 	
 	@Query("SELECT p FROM Personne p WHERE p.telephone = ?1")
-	public Personne findByTel(Double telephone);
+	public Personne findByTel(String telephone);
 	
 	@Query("SELECT p FROM Personne p WHERE p.email = ?1")
 	public Personne findByEmail(String email);

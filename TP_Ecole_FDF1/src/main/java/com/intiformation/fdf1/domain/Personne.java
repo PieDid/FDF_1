@@ -54,7 +54,7 @@ public class Personne implements Serializable{
 	private String prenom;
 	
 	@Column(name = "telephone")
-	private double telephone;
+	private String telephone;
 	
 	@Column(name = "email")
 	private String email;
@@ -86,7 +86,7 @@ public class Personne implements Serializable{
 	 * @param motDePasse
 	 * @param adresse
 	 */
-	public Personne(String nom, String prenom, double telephone, String email, String motDePasse, Adresse adresse) {
+	public Personne(String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
@@ -105,7 +105,7 @@ public class Personne implements Serializable{
 	 * @param motDePasse
 	 * @param adresse
 	 */
-	public Personne(int idPersonne, String nom, String prenom, double telephone, String email, String motDePasse,
+	public Personne(int idPersonne, String nom, String prenom, String telephone, String email, String motDePasse,
 			Adresse adresse) {
 		this.idPersonne = idPersonne;
 		this.nom = nom;
@@ -175,14 +175,14 @@ public class Personne implements Serializable{
 	/**
 	 * @return the telephone
 	 */
-	public double getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(double telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
