@@ -15,10 +15,10 @@ public interface CoursRepository extends JpaRepository<Cours, Integer>{
 	
 	
 	/* Méthodes de requêtes */
-	@Query("SELECT c FROM Cours c WHERE c.idCours = ?1")
+	@Query("SELECT c FROM cours c WHERE c.idCours = ?1")
 	public Cours findById(int idCours);
 	
-	@Query("SELECT c FROM Cours c WHERE c.libelle = ?1")
+	@Query("SELECT c FROM cours c WHERE c.libelle = ?1")
 	public List<Cours> findByLibelle(String libelle);
 	
 	

@@ -41,7 +41,7 @@ public class Adresse implements Serializable{
 	private String rue;
 	
 	@Column(name="codePostal")
-	private int codePostal;
+	private String codePostal;
 	
 	@Column(name="ville")
 	private String ville;
@@ -53,15 +53,13 @@ public class Adresse implements Serializable{
 	/*_________________ ctors ________________*/
 	public Adresse() {}
 
-	public Adresse(String rue, int codePostal, String ville) {
-		super();
+	public Adresse(String rue, String codePostal, String ville) {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
 	}
 	
-	public Adresse(String rue, int codePostal, String ville, Personne personne) {
-		super();
+	public Adresse(String rue, String codePostal, String ville, Personne personne) {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
@@ -93,10 +91,10 @@ public class Adresse implements Serializable{
 		this.rue = rue;
 	}
 
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 

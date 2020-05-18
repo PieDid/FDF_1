@@ -15,16 +15,16 @@ public interface AdresseRepository extends JpaRepository<Adresse, Integer>{
 	
 	
 	/* Méthodes de requêtes */
-	@Query("SELECT a FROM Adresse a WHERE a.idAdresse = ?1")
+	@Query("SELECT a FROM adresse a WHERE a.idAdresse = ?1")
 	public Adresse findById(int idAdresse);
 	
-	@Query("SELECT a FROM Adresse a WHERE a.rue = ?1")
+	@Query("SELECT a FROM adresse a WHERE a.rue = ?1")
 	public List<Adresse> findByRue(String rue);
 	
-	@Query("SELECT a FROM Adresse a WHERE a.codePostal = ?1")
-	public List<Adresse> findByCodePostal(int codePostal);
+	@Query("SELECT a FROM adresse a WHERE a.codePostal = ?1")
+	public List<Adresse> findByCodePostal(String codePostal);
 	
-	@Query("SELECT a FROM Adresse a WHERE a.ville = ?1")
+	@Query("SELECT a FROM adresse a WHERE a.ville = ?1")
 	public List<Adresse> findByVille(String ville);
 	
 	

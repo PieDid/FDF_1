@@ -15,7 +15,7 @@ public interface EtudiantRepository extends PersonneRepository<Etudiant>, JpaRep
 	
 	
 	/* Méthodes de requêtes */
-	@Query("SELECT e FROM Etudiant e WHERE e.promotion = ?1")
+	@Query("SELECT e FROM etudiant e WHERE e.promotion = ?1")
 	public List<Etudiant> findByPromotion(int promotion);
 	
 	

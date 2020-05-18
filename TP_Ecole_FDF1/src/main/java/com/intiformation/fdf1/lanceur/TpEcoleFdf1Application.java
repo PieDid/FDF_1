@@ -17,26 +17,40 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+import com.intiformation.fdf1.domain.Adresse;
+import com.intiformation.fdf1.domain.Personne;
+import com.intiformation.fdf1.repository.AdresseRepository;
+import com.intiformation.fdf1.repository.CoursRepository;
+import com.intiformation.fdf1.repository.PersonneRepository;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude= {DataSourceAutoConfiguration.class, 
 								   DataSourceTransactionManagerAutoConfiguration.class, 
 								   HibernateJpaAutoConfiguration.class})
 @ComponentScan(basePackages = {"com.intiformation.fdf1"})
-//@EnableJpaRepositories("com.intiformation.gestionimmo.repository")
+@EnableJpaRepositories("com.intiformation.fdf1.repository")
 public class TpEcoleFdf1Application implements CommandLineRunner{
 
 	@Autowired
 	private Environment appEnvironment; // pour pointer le fichier application.properties
 	
 	//déclaration + injection de couche DAO
+	@Autowired
+	private AdresseRepository adresseRepository;
 	
+	@Autowired
+	private CoursRepository coursRepository;
+	
+	@Autowired
+	private PersonneRepository<Personne> personneRepository;
 	
 	public static void main(String[] args) {
-		ApplicationContext conteneurIoCSpring = SpringApplication.run(TpEcoleFdf1Application.class, args);
+		ApplicationContext app = SpringApplication.run(TpEcoleFdf1Application.class, args);
 		System.out.println("... Lancement de l'application ...");	
 	} // end main
 
@@ -51,10 +65,27 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*============== Méthode de bases de la DAO (*Repository) ================*/
 		/*========================================================================*/
 		
-		
 		/*============================================*/
 		/*================ Adresse ===================*/
 		/*============================================*/
+		
+		/*__________ Creation des adresses ___________*/
+		
+		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE",null);
+		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06800", "CAGNES-SUR-MER",null);
+		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE",null);
+		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT",null);
+		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS",null);
+		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS",null);
+		
+		/*__________ Ajout ___________*/
+		
+		adresseRepository.save(a1);
+		adresseRepository.save(a2);
+		adresseRepository.save(a3);
+		adresseRepository.save(a4);
+		adresseRepository.save(a5);
+		adresseRepository.save(a6);
 		
 		/*============================================*/
 		/*================ Personne ==================*/
