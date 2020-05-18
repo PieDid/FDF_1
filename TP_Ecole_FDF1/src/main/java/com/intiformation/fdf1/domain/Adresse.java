@@ -9,6 +9,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
+/**
+ * Classe Entité Adresse
+ * 
+ * Liaisons : 
+ * 
+ * Adresse (porteur FK) 1---------1 Personne
+ * 
+ * 
+ * @author IN-DF-028
+ *
+ */
 @Entity(name="adresse")
 @Table(name="adresses")
 public class Adresse {
