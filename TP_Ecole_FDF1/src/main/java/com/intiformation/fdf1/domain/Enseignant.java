@@ -1,6 +1,7 @@
 package com.intiformation.fdf1.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ public class Enseignant extends Personne implements Serializable{
 	/*_____________ associations _____________*/
 	//Enseignant - Cours
 	@OneToMany(mappedBy="enseignant", cascade= CascadeType.ALL)
-	private Cours cours;
+	private List<Cours> cours;
 
 	
 	
@@ -39,7 +40,7 @@ public class Enseignant extends Personne implements Serializable{
 		this.matiere = matiere;
 	}
 	
-	public Enseignant(String matiere, String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse, Cours cours) {
+	public Enseignant(String matiere, String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse, List<Cours> cours) {
 		super(nom, prenom, telephone, email, motDePasse, adresse);
 		this.matiere = matiere;
 		this.cours = cours;
@@ -56,10 +57,10 @@ public class Enseignant extends Personne implements Serializable{
 		this.matiere = matiere;
 	}
 
-	public Cours getCours() {
+	public List<Cours> getCours() {
 		return cours;
 	}
-	public void setCours(Cours cours) {
+	public void setCours(List<Cours> cours) {
 		this.cours = cours;
 	}
 

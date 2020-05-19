@@ -56,7 +56,7 @@ public class Cours implements Serializable{
 	
 	//Cours - Enseignant
 	@ManyToOne
-	@JoinColumn(name="enseignant_id", referencedColumnName="id_enseignant")
+	@JoinColumn(name="enseignant_id", referencedColumnName="id_personne")
 	private Enseignant enseignant;
 	
 	
