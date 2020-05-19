@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.intiformation.fdf1.domain.Etudiant;
-import com.intiformation.fdf1.domain.Personne;
 
 @RepositoryRestResource
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer>{
