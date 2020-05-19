@@ -69,7 +69,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*===== TEST DE LA DAO ====*/
 	
 		//adresseTest(false);  // adresse
-		//personneTest(true);  // personne
+		personneTest(true);  // personne
 		
 		/*============================================*/
 		/*================ Personne ==================*/
@@ -177,7 +177,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		a.setRue("68, rue des Chaligny");
 		a.setCodePostal("06200");
 		a.setVille("NICE");
-		adresseRepository.saveAndFlush(a);
+		adresseRepository.save(a);
 		a = adresseRepository.findById(1);
 		if(display) {
 			System.out.println("== Adresse >>> Update =======================");
@@ -279,7 +279,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		p.setPrenom("Audrey");
 		p.setEmail("audrey.tautou@gmail.com");
 		p.setAdresse(a4);
-		personneRepository.saveAndFlush(p);
+		personneRepository.save(p);
 		p = personneRepository.findById(1);
 		if(display) {
 			System.out.println("== Personne >>> Update =======================");
@@ -289,7 +289,16 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*__________ Delete ___________*/
 		personneRepository.deleteById(3);
 		
-		/*____________ Methodes Spécifiques : findByRue ___________*/
+		/*____________ Methodes Spécifiques : findByVille ___________*/
+//		listePersonne = personneRepository.findAll();
+//		if(display) {
+//			System.out.println("\n== Personne >>> finByVille =======================");
+//			for (Personne p2l : listePersonne) {
+//				System.out.println("\t > " + p2l);
+//			}
+//			System.out.println("=============================================\n\n");
+//		}
+//		
 		
 		
 	} // end personneTest

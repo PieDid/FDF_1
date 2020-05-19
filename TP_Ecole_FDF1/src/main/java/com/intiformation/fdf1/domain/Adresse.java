@@ -28,7 +28,7 @@ import javax.persistence.Transient;
 public class Adresse implements Serializable{
 
 	@Transient
-	private static final long serialVersionUID = 1L;
+	private static long serialVersionUID = 1L;
 	
 	/*_________________ props ________________*/
 
@@ -116,6 +116,7 @@ public class Adresse implements Serializable{
 		return serialVersionUID;
 	}
 
+	
 	
 	
 }

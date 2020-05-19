@@ -34,7 +34,7 @@ public interface PersonneRepository extends JpaRepository<Personne, Integer>{
 	public Personne findByIdAdresse(int idAdresse);
 	
 	@Query("SELECT p FROM personne p WHERE p.adresse.ville = ?1")
-	public Personne findByVille(String ville);
+	public List<Personne> findByVille(String ville);
 	
 	
 }
