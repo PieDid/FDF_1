@@ -1,6 +1,7 @@
 package com.intiformation.fdf1.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -44,12 +47,17 @@ public class Cours implements Serializable{
 	/*_____________ associations _____________*/
 	//Cours - Etudiant
 	
+	@ManyToMany
+	@JoinTable(name = "Etudiant_Cours", 
+			 joinColumns = @JoinColumn(name="cours_id"),
+			 inverseJoinColumns = @JoinColumn(name="etudiant_id"))
+	List<Etudiant> listeEtudiants;
 	
 	
 	//Cours - Enseignant
-//	@ManyToOne
-//	@JoinColumn(name="enseignant_id", referencedColumnName="id_enseignant")
-//	private Enseignant enseignant;
+	@ManyToOne
+	@JoinColumn(name="enseignant_id", referencedColumnName="id_enseignant")
+	private Enseignant enseignant;
 	
 	
 	
@@ -63,8 +71,37 @@ public class Cours implements Serializable{
 		this.libelle = libelle;
 	}
 	
+	public Cours(String libelle, Enseignant enseignant) {
+		super();
+		this.libelle = libelle;
+		this.enseignant = enseignant;
+	}
 	
-	
+	public Cours(int idCours, String libelle, Enseignant enseignant) {
+		super();
+		this.idCours = idCours;
+		this.libelle = libelle;
+		this.enseignant = enseignant;
+	}
+
+
+	public Cours(String libelle, List<Etudiant> listeEtudiants, Enseignant enseignant) {
+		super();
+		this.libelle = libelle;
+		this.listeEtudiants = listeEtudiants;
+		this.enseignant = enseignant;
+	}
+
+
+	public Cours(int idCours, String libelle, List<Etudiant> listeEtudiants, Enseignant enseignant) {
+		super();
+		this.idCours = idCours;
+		this.libelle = libelle;
+		this.listeEtudiants = listeEtudiants;
+		this.enseignant = enseignant;
+	}
+
+
 	/*____________ Méthodes ___________*/
 	@Override
 	public String toString() {
@@ -93,6 +130,39 @@ public class Cours implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	/**
+	 * @return the listeEtudiants
+	 */
+	public List<Etudiant> getListeEtudiants() {
+		return listeEtudiants;
+	}
+
+
+	/**
+	 * @param listeEtudiants the listeEtudiants to set
+	 */
+	public void setListeEtudiants(List<Etudiant> listeEtudiants) {
+		this.listeEtudiants = listeEtudiants;
+	}
+
+
+	/**
+	 * @return the enseignant
+	 */
+	public Enseignant getEnseignant() {
+		return enseignant;
+	}
+
+
+	/**
+	 * @param enseignant the enseignant to set
+	 */
+	public void setEnseignant(Enseignant enseignant) {
+		this.enseignant = enseignant;
+	}
+	
 	
 	
 }

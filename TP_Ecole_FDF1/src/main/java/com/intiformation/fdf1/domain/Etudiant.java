@@ -1,10 +1,12 @@
 package com.intiformation.fdf1.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 
 /**
@@ -30,10 +32,12 @@ public class Etudiant extends Personne implements Serializable{
 	
 	
 	
+	
 	/*_____________ associations _____________*/
 	//Etudiant - Cours
+	@ManyToMany(mappedBy="listeEtudiants")
+	List<Cours> listeCours;
 	
-
 	
 	
 	/*_________________ ctors ________________*/
@@ -52,7 +56,39 @@ public class Etudiant extends Personne implements Serializable{
 		this.promotion = promotion;
 	}
 	
+	
 
+	public Etudiant(String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse,
+			int promotion) {
+		super(nom, prenom, telephone, email, motDePasse, adresse);
+		this.promotion = promotion;
+	}
+
+	
+	
+	public Etudiant(int idPersonne, String nom, String prenom, String telephone, String email, String motDePasse,
+			Adresse adresse, int promotion) {
+		super(idPersonne, nom, prenom, telephone, email, motDePasse, adresse);
+		this.promotion = promotion;
+	}
+	
+	
+
+	public Etudiant(String nom, String prenom, String telephone, String email, String motDePasse, Adresse adresse,
+			int promotion, List<Cours> listeCours) {
+		super(nom, prenom, telephone, email, motDePasse, adresse);
+		this.promotion = promotion;
+		this.listeCours = listeCours;
+	}
+	
+	
+
+	public Etudiant(int idPersonne, String nom, String prenom, String telephone, String email, String motDePasse,
+			Adresse adresse, int promotion, List<Cours> listeCours) {
+		super(idPersonne, nom, prenom, telephone, email, motDePasse, adresse);
+		this.promotion = promotion;
+		this.listeCours = listeCours;
+	}
 
 	/*____________ Getters/Setters ___________*/
 	public int getPromotion() {
@@ -64,6 +100,20 @@ public class Etudiant extends Personne implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the listeCours
+	 */
+	public List<Cours> getListeCours() {
+		return listeCours;
+	}
+
+	/**
+	 * @param listeCours the listeCours to set
+	 */
+	public void setListeCours(List<Cours> listeCours) {
+		this.listeCours = listeCours;
 	}
 	
 	
