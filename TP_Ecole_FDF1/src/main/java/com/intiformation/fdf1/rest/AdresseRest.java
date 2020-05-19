@@ -53,7 +53,7 @@ public class AdresseRest {
 	}
 	
 	@RequestMapping(value = "/adresse/rue/{rue}", method = RequestMethod.GET)
-	public Adresse getAdresseByRue(@PathVariable("rue") String pRue) {
+	public List<Adresse> getAdresseByRue(@PathVariable("rue") String pRue) {
 		return adresseRepository.findByRue(pRue);
 	}
 	

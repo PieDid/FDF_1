@@ -1,6 +1,7 @@
 package com.intiformation.fdf1.lanceur;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -46,6 +47,9 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 	@Autowired
 	private CoursRepository coursRepository;
 	
+	@Autowired
+	private PersonneRepository personneRepository;
+	
 	//@Autowired
 	//private PersonneRepository<Personne> personneRepository;
 	
@@ -61,31 +65,10 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 //		/*________ Exposition (intégration) de l'id de user dans le ws __________*/
 //		repositoryRestConfiguration.exposeIdsFor(User.class);
 		
-		/*========================================================================*/
-		/*============== Méthode de bases de la DAO (*Repository) ================*/
-		/*========================================================================*/
-		
-		/*============================================*/
-		/*================ Adresse ===================*/
-		/*============================================*/
-		
-		/*__________ Creation des adresses ___________*/
-		
-		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
-		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06800", "CAGNES-SUR-MER");
-		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE");
-		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
-		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
-		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
-		
-		/*__________ Ajout ___________*/
-		
-		adresseRepository.save(a1);
-		adresseRepository.save(a2);
-		adresseRepository.save(a3);
-		adresseRepository.save(a4);
-		adresseRepository.save(a5);
-		adresseRepository.save(a6);
+		/*===== TEST DE LA DAO ====*/
+	
+		//adresseTest(false);  // adresse
+		personneTest(true);
 		
 		/*============================================*/
 		/*================ Personne ==================*/
@@ -102,7 +85,173 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*============================================*/
 		/*================== Cours ===================*/
 		/*============================================*/
+		
+		/*==== Initialisation de la BDD ====*/
+		initDataBase();
+		
 	} // end run
+	
+	/**
+	 * initialise la BDD
+	 */
+	public void initDataBase() {
+		
+		/*___ adresse ___*/
+		
+		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
+		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06200", "NICE");
+		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE");
+		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
+		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
+		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
+		
+		adresseRepository.save(a1);
+		adresseRepository.save(a2);
+		adresseRepository.save(a3);
+		adresseRepository.save(a4);
+		adresseRepository.save(a5);
+		adresseRepository.save(a6);
+		
+	} // end initDataBase()
+	
+	/**
+	 * teste les fonctions d'adresse
+	 * @param display
+	 */
+	public void adresseTest(boolean display) {
+		
+		/*__________ Creation des adresses ___________*/
+		
+		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
+		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06200", "NICE");
+		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE");
+		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
+		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
+		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
+		
+		/*__________ Ajout ___________*/
+		
+		adresseRepository.save(a1);
+		adresseRepository.save(a2);
+		adresseRepository.save(a3);
+		adresseRepository.save(a4);
+		adresseRepository.save(a5);
+		adresseRepository.save(a6);
+		
+		/*__________ GetAll ___________*/
+		
+		
+		List<Adresse> listeAdresse = adresseRepository.findAll();
+		if(display) {
+			System.out.println("\n== Adresse >>> GetAll =======================");
+			for (Adresse a : listeAdresse) {
+				System.out.println("\t > " + a);
+			}
+			System.out.println("=============================================\n\n");
+		}
+		/*__________ GetById ___________*/
+		
+		
+		Adresse a = adresseRepository.findById(1);
+		if(display) {
+			System.out.println("== Adresse >>> GetById =======================");
+			System.out.println("\t > " + a);
+			System.out.println("==============================================\n\n");
+		}
+		/*__________ Update ___________*/
+		a.setRue("68, rue des Chaligny");
+		a.setCodePostal("06200");
+		a.setVille("NICE");
+		adresseRepository.saveAndFlush(a);
+		a = adresseRepository.findById(1);
+		if(display) {
+			System.out.println("== Adresse >>> Update =======================");
+			System.out.println("\t > " + a);
+			System.out.println("=============================================\n\n");
+		}
+		/*__________ Delete ___________*/
+		adresseRepository.deleteById(6);
+		
+		/*____________ Methodes Spécifiques : findByRue ___________*/
+		
+		
+		listeAdresse = adresseRepository.findByRue("35, rue des Soeurs");
+		if(display) {
+			System.out.println("\n== Adresse >>> findByRue =======================");
+			for (Adresse al : listeAdresse) {
+				System.out.println("\t > " + al);
+			}
+			System.out.println("=============================================\n\n");
+		}
+		/*_________ Methodes Spécifiques : findByCodePostal _______*/
+		
+		
+		listeAdresse = adresseRepository.findByCodePostal("06200");
+		if(display) {
+			System.out.println("\n== Adresse >>> findByCodePostal =======================");
+			for (Adresse al : listeAdresse) {
+				System.out.println("\t > " + al);
+			}
+			System.out.println("=============================================\n\n");
+		}
+		/*___________ Methodes Spécifiques : findByVille __________*/
+		
+		
+		listeAdresse = adresseRepository.findByVille("NICE");
+		if(display) {
+			System.out.println("\n== Adresse >>> findByVille =======================");
+			for (Adresse al : listeAdresse) {
+				System.out.println("\t > " + al);
+			}
+			System.out.println("=============================================\n\n");
+		}
+		
+		adresseRepository.deleteAll();
+		
+	} // end AdresseTest
+	
+	/**
+	 * methode de test de Personne
+	 * @param display
+	 */
+	public void personneTest(boolean display) {
+		
+		/*__________ Creation des adresses (à mettre dans personne) ___________*/
+		
+		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
+		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06200", "NICE");
+		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE");
+		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
+		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
+		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
+		
+		/*__________ Creation des personnes ___________*/
+		
+		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.audre@gmail.com", "123", a1);
+		Personne p2 = new Personne("Fernandes", "André", "0689575324", "andre.fernandes@gmail.com","123",a2);
+		Personne p3 = new Personne("Tulliez", "Marie", "0698575324", "marie.tulliez@gmail.com", "1234", a3);
+		
+		/*__________ Ajout ___________*/
+		
+		personneRepository.save(p1);
+		personneRepository.save(p2);
+		personneRepository.save(p3);
+		
+		/*__________ GetAll ___________*/
+		
+		
+		List<Personne> listePersonne = personneRepository.findAll();
+		if(display) {
+			System.out.println("\n== Personne >>> GetAll =======================");
+			for (Personne p : listePersonne) {
+				System.out.println("\t > " + p);
+			}
+			System.out.println("=============================================\n\n");
+		}
+		
+	} // end personneTest
+	
+	
 	
 	
 	/**
