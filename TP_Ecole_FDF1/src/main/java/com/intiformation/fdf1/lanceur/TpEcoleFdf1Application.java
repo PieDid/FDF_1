@@ -88,7 +88,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*============================================*/
 		
 		/*==== Initialisation de la BDD ====*/
-		initDataBase();
+		//initDataBase();
 		
 		
 	} // end run
@@ -240,6 +240,13 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
 		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
 		
+		adresseRepository.save(a1);
+		adresseRepository.save(a2);
+		adresseRepository.save(a3);
+		adresseRepository.save(a4);
+		adresseRepository.save(a5);
+		adresseRepository.save(a6);
+		
 		/*__________ Creation des personnes ___________*/
 		
 		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.audre@gmail.com", "123", a1);
@@ -290,15 +297,15 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		personneRepository.deleteById(3);
 		
 		/*____________ Methodes Spécifiques : findByVille ___________*/
-//		listePersonne = personneRepository.findAll();
-//		if(display) {
-//			System.out.println("\n== Personne >>> finByVille =======================");
-//			for (Personne p2l : listePersonne) {
-//				System.out.println("\t > " + p2l);
-//			}
-//			System.out.println("=============================================\n\n");
-//		}
-//		
+		listePersonne = personneRepository.findByVille("LE CREUSOT");
+		if(display) {
+			System.out.println("\n== Personne >>> finByVille =======================");
+			for (Personne p2l : listePersonne) {
+				System.out.println("\t > " + p2l);
+			}
+			System.out.println("=============================================\n\n");
+		}
+		
 		
 		
 	} // end personneTest
