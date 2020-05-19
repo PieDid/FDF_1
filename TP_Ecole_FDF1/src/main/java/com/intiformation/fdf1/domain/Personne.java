@@ -67,7 +67,7 @@ public class Personne implements Serializable{
 	/**
 	 * Liaison  1<-->1 avec adresse
 	 */
-	@OneToOne(fetch= FetchType.EAGER, cascade= CascadeType.ALL)
+	@OneToOne(fetch= FetchType.EAGER, cascade= CascadeType.MERGE)
 	@JoinColumn(name = "adresse_id", referencedColumnName="id_adresse", foreignKey = @ForeignKey(name = "FK_personne_adresse"))
 	private Adresse adresse;
 	

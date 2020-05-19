@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -68,7 +69,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*===== TEST DE LA DAO ====*/
 	
 		//adresseTest(false);  // adresse
-		personneTest(true);
+		//personneTest(true);  // personne
 		
 		/*============================================*/
 		/*================ Personne ==================*/
@@ -88,6 +89,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		
 		/*==== Initialisation de la BDD ====*/
 		initDataBase();
+		
 		
 	} // end run
 	
@@ -111,6 +113,17 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		adresseRepository.save(a4);
 		adresseRepository.save(a5);
 		adresseRepository.save(a6);
+		
+		/*___ personne ___*/
+		
+		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.audre@gmail.com", "123", adresseRepository.findById(1));
+		Personne p2 = new Personne("Fernandes", "André", "0689575324", "andre.fernandes@gmail.com","123",adresseRepository.findById(2));
+		Personne p3 = new Personne("Tulliez", "Marie", "0698575324", "marie.tulliez@gmail.com", "1234", adresseRepository.findById(3));
+		
+		personneRepository.save(p1);
+		personneRepository.save(p2);
+		personneRepository.save(p3);
+
 		
 	} // end initDataBase()
 	
@@ -149,6 +162,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 			}
 			System.out.println("=============================================\n\n");
 		}
+		
 		/*__________ GetById ___________*/
 		
 		
@@ -158,6 +172,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 			System.out.println("\t > " + a);
 			System.out.println("==============================================\n\n");
 		}
+		
 		/*__________ Update ___________*/
 		a.setRue("68, rue des Chaligny");
 		a.setCodePostal("06200");
@@ -248,6 +263,34 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 			}
 			System.out.println("=============================================\n\n");
 		}
+		
+		/*__________ GetById ___________*/
+		
+		
+		Personne p = personneRepository.findById(1);
+		if(display) {
+			System.out.println("== Personne >>> GetById =======================");
+			System.out.println("\t > " + p);
+			System.out.println("==============================================\n\n");
+		}
+		
+		/*__________ Update ___________*/
+		p.setNom("Tautou");
+		p.setPrenom("Audrey");
+		p.setEmail("audrey.tautou@gmail.com");
+		p.setAdresse(a4);
+		personneRepository.saveAndFlush(p);
+		p = personneRepository.findById(1);
+		if(display) {
+			System.out.println("== Personne >>> Update =======================");
+			System.out.println("\t > " + p);
+			System.out.println("=============================================\n\n");
+		}
+		/*__________ Delete ___________*/
+		personneRepository.deleteById(3);
+		
+		/*____________ Methodes Spécifiques : findByRue ___________*/
+		
 		
 	} // end personneTest
 	
