@@ -25,14 +25,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-import com.intiformation.fdf1.domain.Adresse;
-import com.intiformation.fdf1.domain.Cours;
-import com.intiformation.fdf1.domain.Etudiant;
-import com.intiformation.fdf1.domain.Personne;
-import com.intiformation.fdf1.repository.AdresseRepository;
-import com.intiformation.fdf1.repository.CoursRepository;
-import com.intiformation.fdf1.repository.EtudiantRepository;
-import com.intiformation.fdf1.repository.PersonneRepository;
+import com.intiformation.fdf1.domain.*;
+import com.intiformation.fdf1.repository.*;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude= {DataSourceAutoConfiguration.class, 
@@ -57,6 +51,9 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 	
 	@Autowired
 	private EtudiantRepository etudiantRepository;
+	
+	@Autowired
+	private EnseignantRepository enseignantRepository;
 	
 	//@Autowired
 	//private PersonneRepository<Personne> personneRepository;
@@ -322,20 +319,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		adresseRepository.save(a5);
 		adresseRepository.save(a6);
 		
-		/*__________ Création de quelques cours sans associations _______*/
 		
-		Cours c1 = new Cours("Cours de Maths");
-		Cours c2 = new Cours("Cours de Physique");
-		Cours c3 = new Cours("Cours de Géo");
-		
-		coursRepository.save(c1);
-		coursRepository.save(c2);
-		coursRepository.save(c3);
-		
-		
-		List<Cours> lc = new ArrayList<>();
-		lc.add(c1);
-		lc.add(c2);
 		
 		/*__________ Creation des étudiants ___________*/
 		
@@ -347,6 +331,46 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		
 		etudiantRepository.save(e1);
 		etudiantRepository.save(e2);
+		
+		/*__________ Creation des enseignants ___________*/
+		
+		// enseignant sans cours
+		Enseignant ens1 = new Enseignant("Maths", "Flaux", "Pierrick", "+330750302010", "PFlaux@gmail.com", "123", a1);
+		Enseignant ens2 = new Enseignant("Physique", "Fernandes", "Andre", "+33606729004", "AFernandes@gmail.com", "123", a2);
+		
+		/*__________ Ajout des enseignants ___________*/
+		
+		enseignantRepository.save(ens1);
+		enseignantRepository.save(ens2);
+		
+		
+		/*__________ Création de quelques cours avec associations _______*/
+		
+		//création d'une liste d'étudiants à insérer avec les cours :
+		List<Etudiant> listeEtudiants = new ArrayList<>();
+		listeEtudiants.add(e1);
+		listeEtudiants.add(e2);
+		
+		Cours c1 = new Cours("Cours de Maths", listeEtudiants, ens1);
+		
+		listeEtudiants = new ArrayList<>();
+		listeEtudiants.add(e1);
+		Cours c2 = new Cours("Cours de Physique", listeEtudiants, ens2);
+		
+		listeEtudiants = new ArrayList<>();
+		listeEtudiants.add(e2);
+		Cours c3 = new Cours("Cours de Géo", listeEtudiants, ens1);
+		
+		coursRepository.save(c1);
+		coursRepository.save(c2);
+		coursRepository.save(c3);
+		
+		
+		
+//		List<Cours> lc = new ArrayList<>();
+//		lc.add(c1);
+//		lc.add(c2);
+		
 		
 		/*__________ GetAll ___________*/
 		
@@ -371,19 +395,19 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		}
 		
 		/*__________ Update ___________*/
-		e.setNom("Tautou");
-		e.setPrenom("Audrey");
-		e.setEmail("audrey.tautou@gmail.com");
-		e.setAdresse(a4);
-		etudiantRepository.save(e);
-		e = etudiantRepository.findById(1);
-		if(display) {
-			System.out.println("== Etudiant >>> Update =======================");
-			System.out.println("\t > " + e);
-			System.out.println("=============================================\n\n");
-		}
+//		e.setNom("Tautou");
+//		e.setPrenom("Audrey");
+//		e.setEmail("audrey.tautou@gmail.com");
+//		e.setAdresse(a4);
+//		etudiantRepository.save(e);
+//		e = etudiantRepository.findById(1);
+//		if(display) {
+//			System.out.println("== Etudiant >>> Update =======================");
+//			System.out.println("\t > " + e);
+//			System.out.println("=============================================\n\n");
+//		}
 		/*__________ Delete ___________*/
-		etudiantRepository.deleteById(2);
+//		etudiantRepository.deleteById(2);
 		
 	} // end etudiantTest
 	
