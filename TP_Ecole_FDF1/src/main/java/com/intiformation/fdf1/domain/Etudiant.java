@@ -89,11 +89,24 @@ public class Etudiant extends Personne implements Serializable{
 		this.promotion = promotion;
 		this.listeCours = listeCours;
 	}
+	
+	/*_________________ meths ________________*/
+	
+	@Override
+	public String toString() {
+		return "Etudiant [promotion=" + promotion +", toString()=" + super.toString()
+				+ "]";
+	}
 
 	/*____________ Getters/Setters ___________*/
 	public int getPromotion() {
 		return promotion;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	
+
 	public void setPromotion(int promotion) {
 		this.promotion = promotion;
 	}

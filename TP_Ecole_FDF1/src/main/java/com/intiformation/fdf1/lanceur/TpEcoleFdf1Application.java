@@ -1,6 +1,7 @@
 package com.intiformation.fdf1.lanceur;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -25,9 +26,12 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import com.intiformation.fdf1.domain.Adresse;
+import com.intiformation.fdf1.domain.Cours;
+import com.intiformation.fdf1.domain.Etudiant;
 import com.intiformation.fdf1.domain.Personne;
 import com.intiformation.fdf1.repository.AdresseRepository;
 import com.intiformation.fdf1.repository.CoursRepository;
+import com.intiformation.fdf1.repository.EtudiantRepository;
 import com.intiformation.fdf1.repository.PersonneRepository;
 
 @SpringBootApplication
@@ -51,6 +55,9 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 	@Autowired
 	private PersonneRepository personneRepository;
 	
+	@Autowired
+	private EtudiantRepository etudiantRepository;
+	
 	//@Autowired
 	//private PersonneRepository<Personne> personneRepository;
 	
@@ -69,27 +76,11 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		/*===== TEST DE LA DAO ====*/
 	
 		//adresseTest(false);  // adresse
-		personneTest(true);  // personne
-		
-		/*============================================*/
-		/*================ Personne ==================*/
-		/*============================================*/
-		
-		/*============================================*/
-		/*================ Etudiant ==================*/
-		/*============================================*/
-		
-		/*============================================*/
-		/*================ Enseignant ================*/
-		/*============================================*/
-		
-		/*============================================*/
-		/*================== Cours ===================*/
-		/*============================================*/
+		//personneTest(true);  // personne
+		etudiantTest(true);  //etudiant
 		
 		/*==== Initialisation de la BDD ====*/
-		//initDataBase();
-		
+		//initDataBase();	
 		
 	} // end run
 	
@@ -116,7 +107,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		
 		/*___ personne ___*/
 		
-		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.audre@gmail.com", "123", adresseRepository.findById(1));
+		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.fourquet@gmail.com", "123", adresseRepository.findById(1));
 		Personne p2 = new Personne("Fernandes", "André", "0689575324", "andre.fernandes@gmail.com","123",adresseRepository.findById(2));
 		Personne p3 = new Personne("Tulliez", "Marie", "0698575324", "marie.tulliez@gmail.com", "1234", adresseRepository.findById(3));
 		
@@ -235,7 +226,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		
 		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
 		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06200", "NICE");
-		Adresse a3 = new Adresse("35, rue des Soeurs", "93120", "LA COURNEUVE");
+		Adresse a3 = new Adresse("35, rue des Soeurs", "71200", "LE CREUSOT");
 		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
 		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
 		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
@@ -249,7 +240,7 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 		
 		/*__________ Creation des personnes ___________*/
 		
-		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.audre@gmail.com", "123", a1);
+		Personne p1 = new Personne("Fourquet", "Laure", "0547895264", "laure.fourquet@gmail.com", "123", a1);
 		Personne p2 = new Personne("Fernandes", "André", "0689575324", "andre.fernandes@gmail.com","123",a2);
 		Personne p3 = new Personne("Tulliez", "Marie", "0698575324", "marie.tulliez@gmail.com", "1234", a3);
 		
@@ -294,23 +285,107 @@ public class TpEcoleFdf1Application implements CommandLineRunner{
 			System.out.println("=============================================\n\n");
 		}
 		/*__________ Delete ___________*/
-		personneRepository.deleteById(3);
+		//personneRepository.deleteById(3);
 		
 		/*____________ Methodes Spécifiques : findByVille ___________*/
 		listePersonne = personneRepository.findByVille("LE CREUSOT");
 		if(display) {
-			System.out.println("\n== Personne >>> finByVille =======================");
+			System.out.println("\n== Personne >>> findByVille =======================");
 			for (Personne p2l : listePersonne) {
 				System.out.println("\t > " + p2l);
 			}
 			System.out.println("=============================================\n\n");
 		}
 		
-		
-		
+
 	} // end personneTest
 	
-	
+	/**
+	 * Methode de test d'étudiant
+	 * @param display
+	 */
+	public void etudiantTest(boolean display) {
+		
+		/*__________ Creation des adresses (à mettre dans étudiant) ___________*/
+		
+		Adresse a1 = new Adresse("81, rue des Mesanges", "97438", "SAINTE-MARIE");
+		Adresse a2 = new Adresse("58, Chemin Du Lavarin Sud", "06200", "NICE");
+		Adresse a3 = new Adresse("35, rue des Soeurs", "71200", "LE CREUSOT");
+		Adresse a4 = new Adresse("23, boulevard Aristide Briand", "71200", "LE CREUSOT");
+		Adresse a5 = new Adresse("30, rue La Boétie", "75017", "PARIS");
+		Adresse a6 = new Adresse("10, rue Saint Germain", "92230", "GENNEVILLIERS");
+		
+		adresseRepository.save(a1);
+		adresseRepository.save(a2);
+		adresseRepository.save(a3);
+		adresseRepository.save(a4);
+		adresseRepository.save(a5);
+		adresseRepository.save(a6);
+		
+		/*__________ Création de quelques cours sans associations _______*/
+		
+		Cours c1 = new Cours("Cours de Maths");
+		Cours c2 = new Cours("Cours de Physique");
+		Cours c3 = new Cours("Cours de Géo");
+		
+		coursRepository.save(c1);
+		coursRepository.save(c2);
+		coursRepository.save(c3);
+		
+		
+		List<Cours> lc = new ArrayList<>();
+		lc.add(c1);
+		lc.add(c2);
+		
+		/*__________ Creation des étudiants ___________*/
+		
+		// etudiant sans cours (etudiant avec cours ne marche pas trop : le faire du coté de cours? )
+		Etudiant e1 = new Etudiant("Mezine", "Younes", "0602050405", "mezine.younes@gmail.com", "0000", a5, 2020);
+		Etudiant e2 = new Etudiant("Cheikh", "Hamadi", "0011223344", "hamadi.cheikh@gmail.com", "1111", a6, 2019);
+		
+		/*__________ Ajout des étudiants ___________*/
+		
+		etudiantRepository.save(e1);
+		etudiantRepository.save(e2);
+		
+		/*__________ GetAll ___________*/
+		
+		
+		List<Etudiant> listeEtudiant = etudiantRepository.findAll();
+		if(display) {
+			System.out.println("\n== Etudiant >>> GetAll =======================");
+			for (Etudiant e : listeEtudiant) {
+				System.out.println("\t > " + e);
+			}
+			System.out.println("=============================================\n\n");
+		}	
+		
+		/*__________ GetById ___________*/
+		
+		
+		Etudiant e = etudiantRepository.findById(1);
+		if(display) {
+			System.out.println("== Etudiant >>> GetById =======================");
+			System.out.println("\t > " + e);
+			System.out.println("==============================================\n\n");
+		}
+		
+		/*__________ Update ___________*/
+		e.setNom("Tautou");
+		e.setPrenom("Audrey");
+		e.setEmail("audrey.tautou@gmail.com");
+		e.setAdresse(a4);
+		etudiantRepository.save(e);
+		e = etudiantRepository.findById(1);
+		if(display) {
+			System.out.println("== Etudiant >>> Update =======================");
+			System.out.println("\t > " + e);
+			System.out.println("=============================================\n\n");
+		}
+		/*__________ Delete ___________*/
+		etudiantRepository.deleteById(2);
+		
+	} // end etudiantTest
 	
 	
 	/**
