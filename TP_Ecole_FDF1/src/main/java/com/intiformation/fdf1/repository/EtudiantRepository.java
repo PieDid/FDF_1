@@ -33,5 +33,17 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Integer>{
 	@Query("SELECT e FROM etudiant e WHERE e.promotion = ?1")
 	public List<Etudiant> findByPromotion(int promotion);
 	
+	@Query("SELECT e FROM etudiant e WHERE e.adresse.idAdresse = ?1")
+	public Etudiant findByIdAdresse(int idAdresse);
+	
+	@Query("SELECT e FROM etudiant e WHERE e.adresse.ville = ?1")
+	public List<Etudiant> findByVille(String ville);
+	
+	@Query("SELECT e FROM etudiant e WHERE e.adresse.rue = ?1")
+	public List<Etudiant> findByRue(String rue);
+	
+	@Query("SELECT e FROM etudiant e WHERE e.adresse.codePostal = ?1")
+	public List<Etudiant> findByCodePostal(String codePostal);
+	
 	
 }

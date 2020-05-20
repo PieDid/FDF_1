@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.intiformation.fdf1.domain.Adresse;
 import com.intiformation.fdf1.domain.Personne;
 import com.intiformation.fdf1.repository.PersonneRepository;
 
@@ -96,7 +95,7 @@ public class PersonneRest {
 	} 
 	
 	@RequestMapping(value = "/personne/codePostal/{codePostal}", method = RequestMethod.GET)
-	public List<Personne> getPersonneBycodePostal(@PathVariable("coldePostal") String pCodePostal){
+	public List<Personne> getPersonneBycodePostal(@PathVariable("codePostal") String pCodePostal){
 		return personneRepository.findByCodePostal(pCodePostal);
 	} 
 	

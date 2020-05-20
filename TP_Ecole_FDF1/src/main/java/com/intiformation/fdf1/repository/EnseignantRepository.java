@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.intiformation.fdf1.domain.Enseignant;
+import com.intiformation.fdf1.domain.Etudiant;
 
 @RepositoryRestResource
 public interface EnseignantRepository extends JpaRepository<Enseignant, Integer>{
@@ -31,7 +32,19 @@ public interface EnseignantRepository extends JpaRepository<Enseignant, Integer>
 	public Enseignant findByEmail(String email);
 	
 	@Query("SELECT e FROM enseignant e WHERE e.matiere = ?1")
-	public List<Enseignant> findByMatiere(int matiere);
+	public List<Enseignant> findByMatiere(String matiere);
+	
+	@Query("SELECT e FROM enseignant e WHERE e.adresse.idAdresse = ?1")
+	public Enseignant findByIdAdresse(int idAdresse);
+	
+	@Query("SELECT e FROM enseignant e WHERE e.adresse.ville = ?1")
+	public List<Enseignant> findByVille(String ville);
+	
+	@Query("SELECT e FROM enseignant e WHERE e.adresse.rue = ?1")
+	public List<Enseignant> findByRue(String rue);
+	
+	@Query("SELECT e FROM enseignant e WHERE e.adresse.codePostal = ?1")
+	public List<Enseignant> findByCodePostal(String codePostal);
 	
 	
 }
