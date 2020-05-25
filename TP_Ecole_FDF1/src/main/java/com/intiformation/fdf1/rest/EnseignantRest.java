@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.intiformation.fdf1.domain.Enseignant;
 import com.intiformation.fdf1.repository.EnseignantRepository;
 
+/**
+ * WS REST de l'enseignant
+ * @author IN-DF-028
+ *
+ */
 @RestController
 @RequestMapping("/enseignant-rest")
 public class EnseignantRest {
