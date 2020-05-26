@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * Classe Entité Cours
@@ -48,6 +50,7 @@ public class Cours implements Serializable{
 	//Cours - Etudiant
 	
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "Etudiant_Cours", 
 			 joinColumns = @JoinColumn(name="cours_id"),
 			 inverseJoinColumns = @JoinColumn(name="etudiant_id"))
@@ -56,6 +59,7 @@ public class Cours implements Serializable{
 	
 	//Cours - Enseignant
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="enseignant_id", referencedColumnName="id_personne")
 	private Enseignant enseignant;
 	

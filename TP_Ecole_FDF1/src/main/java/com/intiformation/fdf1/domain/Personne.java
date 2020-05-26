@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * Classe Entité Personne
@@ -68,6 +70,7 @@ public class Personne implements Serializable{
 	 * Liaison  1<-->1 avec adresse
 	 */
 	@OneToOne(fetch= FetchType.EAGER, cascade= CascadeType.MERGE)
+	@JsonIgnore
 	@JoinColumn(name = "adresse_id", referencedColumnName="id_adresse", foreignKey = @ForeignKey(name = "FK_personne_adresse"))
 	private Adresse adresse;
 	

@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * Classe Entité Adresse
@@ -47,6 +49,7 @@ public class Adresse implements Serializable{
 	private String ville;
 	
 	@OneToOne(mappedBy = "adresse")
+	@JsonIgnore
 	private Personne personne;
 	
 	

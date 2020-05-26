@@ -8,6 +8,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * Classe Entité Etudiant
@@ -36,6 +38,7 @@ public class Etudiant extends Personne implements Serializable{
 	/*_____________ associations _____________*/
 	//Etudiant - Cours
 	@ManyToMany(mappedBy="listeEtudiants")
+	@JsonIgnore
 	List<Cours> listeCours;
 	
 	

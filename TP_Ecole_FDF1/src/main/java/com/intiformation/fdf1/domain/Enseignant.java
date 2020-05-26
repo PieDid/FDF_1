@@ -9,6 +9,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="enseignant")
 @DiscriminatorValue("Enseignant")
 public class Enseignant extends Personne implements Serializable{
@@ -25,6 +27,7 @@ public class Enseignant extends Personne implements Serializable{
 	/*_____________ associations _____________*/
 	//Enseignant - Cours
 	@OneToMany(mappedBy="enseignant", cascade= CascadeType.ALL)
+	@JsonIgnore
 	private List<Cours> cours;
 
 	
