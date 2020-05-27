@@ -20,6 +20,7 @@ import com.intiformation.fdf1.repository.AdresseRepository;
  * @author IN-DF-028
  *
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/adresse-rest")
 public class AdresseRest {
